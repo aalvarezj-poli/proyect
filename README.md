@@ -1,63 +1,67 @@
 # Sales Report Generator
 
-This project is part of a Java programming course assignment. It consists of two main parts:
+This project is part of a Java programming course assignment. It consists of two main programs:
 
-1. GenerateInfoFiles: A program that generates random test data files
-2. Main: A program that processes these files to generate sales reports (to be implemented)
+1. `GenerateInfoFiles`: Generates random test data files
+2. `Main`: Processes the generated files to create sales reports
 
 ## Project Structure
 
-The project generates the following files:
+The project includes the following files:
+
+- `GenerateInfoFiles.java`: Generates test data files
+- `Main.java`: Processes data and generates reports
+- `GenerateInfoFilesTest.java`: Unit tests for the data generation
+- `pom.xml`: Maven configuration file
+- `conclusion.txt`: Project summary and learning outcomes
+
+## Generated Files
+
+The program generates the following files:
 
 - `sales/`: Directory containing individual sales files for each salesman
 - `products.txt`: File containing product information
 - `salesmen.txt`: File containing salesman information
+- `sales_report.txt`: Report of sales by salesman (sorted by total sales)
+- `products_report.txt`: Report of products sold (sorted by quantity)
 
-## File Formats
-
-### Sales Files (in sales/ directory)
-```
-CC;1001
-1;5;
-2;3;
-3;1;
-```
-
-### Products File (products.txt)
-```
-1;Product1;150.00
-2;Product2;200.00
-3;Product3;300.00
-```
-
-### Salesmen File (salesmen.txt)
-```
-CC;1001;John;Smith
-CC;1002;Jane;Johnson
-CC;1003;Michael;Williams
-```
 
 ## How to Run
 
 1. Compile the Java files:
 ```bash
-javac GenerateInfoFiles.java
+javac GenerateInfoFiles.java Main.java
 ```
 
-2. Run the program:
+2. Generate test data:
 ```bash
 java GenerateInfoFiles
 ```
 
-The program will generate all necessary test files in the current directory.
+3. Generate reports:
+```bash
+java Main
+```
+
+## Running Tests
+
+To run the unit tests:
+```bash
+mvn test
+```
 
 ## Requirements
 
 - Java 8 or higher
+- Maven (for running tests)
+- Eclipse IDE (recommended)
 
 ## Features
 
 - Generates random but realistic test data
-- Creates all required file formats
-- Includes proper error handling
-- Follows Java coding standards and best practices 
+- Processes sales data from multiple files
+- Generates sorted reports by sales and product quantities
+- Includes comprehensive error handling
+- Follows Java coding standards and best practices
+- Includes unit tests for data generation
+- Well-documented code with proper comments 
