@@ -23,7 +23,8 @@ public class Main {
             // Load data
             Map<String, Product> products = loadProducts();
             Map<String, Salesman> salesmen = loadSalesmen();
-            processSalesFiles(products, salesmen);
+            // Start the recursive processing from the base sales directory based on code review from the tutor
+            processSalesFiles(new File(SALES_DIR), products, salesmen);
 
             // Generate reports
             generateSalesReport(salesmen);
@@ -67,15 +68,25 @@ public class Main {
     }
 
     /**
-     * Processes all sales files and updates salesman and product statistics
+     * Recursively processes sales files in a directory and its subdirectories,
+     * updating salesman and product statistics.
+     * @param directory The directory to scan for sales files.
+     * @param products A map of product IDs to Product objects.
+     * @param salesmen A map of salesman IDs to Salesman objects.
+     * @throws IOException If an I/O error occurs.
      */
-    private static void processSalesFiles(Map<String, Product> products, Map<String, Salesman> salesmen) throws IOException {
-        File salesDir = new File(SALES_DIR);
-        File[] salesFiles = salesDir.listFiles((dir, name) -> name.endsWith(".txt"));
-        
-        if (salesFiles != null) {
-            for (File file : salesFiles) {
-                processSalesFile(file, products, salesmen);
+    private static void processSalesFiles(File directory, Map<String, Product> products, Map<String, Salesman> salesmen) throws IOException {
+        File[] files = directory.listFiles(); // List all files and directories
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    // If it's a directory, recurse into it
+                    processSalesFiles(file, products, salesmen);
+                } else if (file.isFile() && file.getName().endsWith(".txt")) {
+                    // If it's a .txt file, process it
+                    processSalesFile(file, products, salesmen);
+                }
             }
         }
     }
@@ -185,4 +196,4 @@ public class Main {
 
         public double getTotalSales() { return totalSales; }
     }
-} 
+}
